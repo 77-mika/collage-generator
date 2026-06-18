@@ -10,24 +10,8 @@ export interface CreateCollageRequestInput {
 }
 
 export class CollageService {
-    async createRequest(
-        input: CreateCollageRequestInput,
-    ): Promise<CollageRequest> {
-        if (!input.orientation || !input.borderColor) {
-            throw new AppError("Invalid border color format", 400);
-        } else if (input.borderSize < 0 || input.borderSize > 100) {
-            throw new AppError("Invalid border color format", 400);
-        } else if (!Object.values(Orientation).includes(input.orientation)) {
-            throw new AppError("Invalid border color format", 400);
-        } else if (!/^#([0-9A-F]{3}){1,2}$/i.test(input.borderColor)) {
-            throw new AppError("Invalid border color format", 400);
-        }
-        const document = await CollageRequestModel.create({
-            orientation: input.orientation,
-            borderSize: input.borderSize,
-            borderColor: input.borderColor,
-        });
-        const collageRequest: CollageRequest = {
+    private mapToCollageRequest(document: any): CollageRequest {
+        return {
             id: document._id.toString(),
             orientation: document.orientation,
             borderSize: document.borderSize,
@@ -36,8 +20,29 @@ export class CollageService {
             createdAt: document.createdAt,
             updatedAt: document.updatedAt,
         };
+    }
+    async createRequest(
+        input: CreateCollageRequestInput,
+    ): Promise<CollageRequest> {
+        if (!input.orientation || !input.borderColor) {
+            throw new AppError("Missing required fields", 400);
+        } else if (input.borderSize < 0 || input.borderSize > 100) {
+            throw new AppError("Border size must be between 0 and 100", 400);
+        } else if (!Object.values(Orientation).includes(input.orientation)) {
+            throw new AppError("Invalid orientation value", 400);
+        } else if (!/^#([0-9A-F]{3}){1,2}$/i.test(input.borderColor)) {
+            throw new AppError(
+                "Invalid border color format. Expected hex color code.",
+                400,
+            );
+        }
+        const document = await CollageRequestModel.create({
+            orientation: input.orientation,
+            borderSize: input.borderSize,
+            borderColor: input.borderColor,
+        });
 
-        return collageRequest;
+        return this.mapToCollageRequest(document);
     }
 
     async listRequest(): Promise<CollageRequest[]> {
@@ -45,17 +50,7 @@ export class CollageService {
             createdAt: -1,
         });
 
-        const collageRequests: CollageRequest[] = documents.map((doc) => ({
-            id: doc._id.toString(),
-            orientation: doc.orientation,
-            borderSize: doc.borderSize,
-            borderColor: doc.borderColor,
-            status: doc.status,
-            createdAt: doc.createdAt,
-            updatedAt: doc.updatedAt,
-        }));
-
-        return collageRequests;
+        return documents.map((doc) => this.mapToCollageRequest(doc));
     }
 
     async cancelRequest(id: string): Promise<CollageRequest> {
@@ -74,15 +69,7 @@ export class CollageService {
 
         document.status = CollageStatus.CANCELLED;
         await document.save();
-        const collageRequest: CollageRequest = {
-            id: document._id.toString(),
-            orientation: document.orientation,
-            borderSize: document.borderSize,
-            borderColor: document.borderColor,
-            status: document.status,
-            createdAt: document.createdAt,
-            updatedAt: document.updatedAt,
-        };
-        return collageRequest
+
+        return this.mapToCollageRequest(document);
     }
 }
