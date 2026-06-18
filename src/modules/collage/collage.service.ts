@@ -22,7 +22,7 @@ export class CollageService {
             throw new Error(
                 "Invalid border color format. Expected hex color code.",
             );
-        }                                                               
+        }
         const document = await CollageRequestModel.create({
             orientation: input.orientation,
             borderSize: input.borderSize,
@@ -39,5 +39,23 @@ export class CollageService {
         };
 
         return collageRequest;
+    }
+
+    async listRequest(): Promise<CollageRequest[]> {
+        const documents = await CollageRequestModel.find().sort({
+            createdAt: -1,
+        });
+
+        const collageRequests: CollageRequest[] = documents.map((doc) => ({
+            id: doc._id.toString(),
+            orientation: doc.orientation,
+            borderSize: doc.borderSize,
+            borderColor: doc.borderColor,
+            status: doc.status,
+            createdAt: doc.createdAt,
+            updatedAt: doc.updatedAt,
+        }));
+
+        return collageRequests;
     }
 }
