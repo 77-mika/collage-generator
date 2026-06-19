@@ -1,6 +1,6 @@
 export enum Orientation {
     HORIZONTAL = "HORIZONTAL",
-    VERTICAL = "VERTICAL"
+    VERTICAL = "VERTICAL",
 }
 
 export enum CollageStatus {
@@ -8,15 +8,26 @@ export enum CollageStatus {
     PROCESSING = "PROCESSING",
     COMPLETED = "COMPLETED",
     FAILED = "FAILED",
-    CANCELLED = "CANCELLED"
+    CANCELLED = "CANCELLED",
 }
 
 export interface CollageRequest {
-    id : string;
-    orientation : Orientation;
-    borderSize : number;
-    borderColor : string;
-    status : CollageStatus;
-    createdAt : Date;
-    updatedAt : Date;
+    id: string;
+    orientation: Orientation;
+    borderSize: number;
+    borderColor: string;
+
+    images: CollageImage[];
+
+    resultImageKey?: string;
+
+    status: CollageStatus;
+
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+export interface CollageImage {
+    key: string;
+    originalName: string;
 }
