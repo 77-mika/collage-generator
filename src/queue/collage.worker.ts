@@ -7,10 +7,12 @@ const processor = new CollageProcessorService();
 export const collageWorker = new Worker(
     "collage",
     async (job) => {
-        await processor.processRequestById(job.data.requestId);
+        if (job.name === "process-collage") {
+            await processor.processRequestById(job.data.requestId);
+        }
     },
     {
         connection,
-        concurrency: 1,
+        concurrency: 3,
     }
 );

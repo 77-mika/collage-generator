@@ -10,16 +10,7 @@ export class CleanupService {
 
         console.log("Cutoff date:", cutoffDate);
 
-        const oldRequests = await CollageRequestModel.find({
-            createdAt: { $lt: cutoffDate },
-            status: {
-                $in: [
-                    CollageStatus.COMPLETED,
-                    CollageStatus.FAILED,
-                    CollageStatus.CANCELLED,
-                ],
-            },
-        });
+        const oldRequests = await CollageRequestModel.find({});
 
         console.log("Found requests:", oldRequests.length);
 

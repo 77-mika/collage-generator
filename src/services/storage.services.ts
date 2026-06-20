@@ -82,11 +82,18 @@ export class StorageService {
     }
 
     async deleteFile(key: string): Promise<void> {
-        await this.client.send(
-            new DeleteObjectCommand({
-                Bucket: process.env.LIARA_BUCKET_NAME,
-                Key: key,
-            }),
-        );
+        try {
+            await this.client.send(
+                new DeleteObjectCommand({
+                    Bucket: process.env.LIARA_BUCKET_NAME,
+                    Key: key,
+                }),
+            );
+
+            console.log("Deleted from storage:", key);
+        } catch (err) {
+            console.error("Failed to delete:", key, err);
+            throw err;
+        }
     }
 }
