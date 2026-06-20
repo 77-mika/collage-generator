@@ -1,4 +1,5 @@
 import { CollageRequestModel } from "../modules/collage/collage.model";
+import { CollageStatus } from "../modules/collage/collage.types";
 import { StorageService } from "./storage.services";
 
 export class CleanupService {
@@ -11,6 +12,13 @@ export class CleanupService {
 
         const oldRequests = await CollageRequestModel.find({
             createdAt: { $lt: cutoffDate },
+            status: {
+                $in: [
+                    CollageStatus.COMPLETED,
+                    CollageStatus.FAILED,
+                    CollageStatus.CANCELLED,
+                ],
+            },
         });
 
         console.log("Found requests:", oldRequests.length);

@@ -1,10 +1,10 @@
 # .gitignore
+logs/
 .env
 .env.local
 .env.*.local
 *.env
-
 node_modules/
 
-logs/*
+
 

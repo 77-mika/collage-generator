@@ -55,8 +55,8 @@ export class CollageService {
             );
         } else if (input.images.length === 0) {
             throw new AppError("At least one image is required", 400);
-        } else if (input.images.length > 3) {
-            throw new AppError("Maximum 3 images allowed", 400);
+        } else if (input.images.length > 3 || input.images.length === 1 ) {
+            throw new AppError("Maximum 3 images allowed and Minimum is 2 ", 400);
         }
         const document = await CollageRequestModel.create({
             orientation: input.orientation,

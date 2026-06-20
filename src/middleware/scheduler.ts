@@ -1,4 +1,3 @@
-// scheduler.ts
 import { CleanupService } from "../services/cleanup.services";
 
 const cleanupService = new CleanupService();
