@@ -586,3 +586,108 @@ TypeError: Invalid URL
 [2026-06-20 11:20:56] INFO: Server is running on http://localhost:4000
 [2026-06-20 11:22:40] HTTP: ::ffff:127.0.0.1 - - [20/Jun/2026:07:52:40 +0000] "POST /api/v1/collage-requests HTTP/1.1" 201 634 "-" "PostmanRuntime/7.54.0"
 [2026-06-20 11:22:42] HTTP: ::ffff:127.0.0.1 - - [20/Jun/2026:07:52:42 +0000] "POST /api/v1/collage-requests HTTP/1.1" 201 634 "-" "PostmanRuntime/7.54.0"
+[2026-06-20 11:51:06] INFO: MongoDB connected: localhost
+[2026-06-20 11:51:06] INFO: Server is running on http://localhost:4000
+[2026-06-20 11:51:37] HTTP: ::ffff:127.0.0.1 - - [20/Jun/2026:08:21:37 +0000] "POST /api/v1/collage-requests HTTP/1.1" 201 634 "-" "PostmanRuntime/7.54.0"
+[2026-06-20 11:55:48] INFO: MongoDB connected: localhost
+[2026-06-20 11:55:48] INFO: Server is running on http://localhost:4000
+[2026-06-20 11:56:02] INFO: MongoDB connected: localhost
+[2026-06-20 11:56:02] INFO: Server is running on http://localhost:4000
+[2026-06-20 11:57:58] INFO: MongoDB connected: localhost
+[2026-06-20 11:57:58] INFO: Server is running on http://localhost:4000
+[2026-06-20 11:59:25] INFO: MongoDB connected: localhost
+[2026-06-20 11:59:25] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:02:34] INFO: MongoDB connected: localhost
+[2026-06-20 12:02:34] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:13:53] INFO: MongoDB connected: localhost
+[2026-06-20 12:13:53] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:14:35] INFO: MongoDB connected: localhost
+[2026-06-20 12:14:35] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:14:48] INFO: MongoDB connected: localhost
+[2026-06-20 12:14:48] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:17:23] INFO: MongoDB connected: localhost
+[2026-06-20 12:17:23] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:17:34] INFO: MongoDB connected: localhost
+[2026-06-20 12:17:34] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:17:40] INFO: MongoDB connected: localhost
+[2026-06-20 12:17:40] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:17:43] INFO: MongoDB connected: localhost
+[2026-06-20 12:17:43] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:17:46] INFO: MongoDB connected: localhost
+[2026-06-20 12:17:46] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:27:21] INFO: MongoDB connected: localhost
+[2026-06-20 12:27:21] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:27:32] INFO: MongoDB connected: localhost
+[2026-06-20 12:27:32] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:28:02] INFO: MongoDB connected: localhost
+[2026-06-20 12:28:02] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:28:24] INFO: MongoDB connected: localhost
+[2026-06-20 12:28:24] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:28:46] INFO: MongoDB connected: localhost
+[2026-06-20 12:28:46] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:28:50] INFO: MongoDB connected: localhost
+[2026-06-20 12:28:50] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:28:51] INFO: MongoDB connected: localhost
+[2026-06-20 12:28:51] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:28:53] INFO: MongoDB connected: localhost
+[2026-06-20 12:28:53] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:29:06] INFO: MongoDB connected: localhost
+[2026-06-20 12:29:06] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:31:29] INFO: MongoDB connected: localhost
+[2026-06-20 12:31:29] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:33:27] INFO: MongoDB connected: localhost
+[2026-06-20 12:33:27] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:35:03] INFO: MongoDB connected: localhost
+[2026-06-20 12:35:03] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:36:02] INFO: MongoDB connected: localhost
+[2026-06-20 12:36:02] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:36:06] INFO: MongoDB connected: localhost
+[2026-06-20 12:36:06] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:37:20] INFO: MongoDB connected: localhost
+[2026-06-20 12:37:20] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:37:22] INFO: MongoDB connected: localhost
+[2026-06-20 12:37:22] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:37:24] INFO: MongoDB connected: localhost
+[2026-06-20 12:37:24] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:37:27] INFO: MongoDB connected: localhost
+[2026-06-20 12:37:27] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:37:31] INFO: MongoDB connected: localhost
+[2026-06-20 12:37:31] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:37:43] INFO: MongoDB connected: localhost
+[2026-06-20 12:37:43] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:40:23] INFO: MongoDB connected: localhost
+[2026-06-20 12:40:23] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:43:24] INFO: MongoDB connected: localhost
+[2026-06-20 12:43:24] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:43:31] INFO: MongoDB connected: localhost
+[2026-06-20 12:43:31] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:43:41] INFO: MongoDB connected: localhost
+[2026-06-20 12:43:41] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:43:44] INFO: MongoDB connected: localhost
+[2026-06-20 12:43:44] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:43:48] INFO: MongoDB connected: localhost
+[2026-06-20 12:43:48] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:45:48] INFO: MongoDB connected: localhost
+[2026-06-20 12:45:48] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:45:50] INFO: MongoDB connected: localhost
+[2026-06-20 12:45:50] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:45:53] INFO: MongoDB connected: localhost
+[2026-06-20 12:45:53] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:46:35] INFO: MongoDB connected: localhost
+[2026-06-20 12:46:35] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:48:37] INFO: MongoDB connected: localhost
+[2026-06-20 12:48:37] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:51:15] INFO: MongoDB connected: localhost
+[2026-06-20 12:51:15] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:52:12] HTTP: ::ffff:127.0.0.1 - - [20/Jun/2026:09:22:12 +0000] "POST /api/v1/collage-requests HTTP/1.1" 201 634 "-" "PostmanRuntime/7.54.0"
+[2026-06-20 12:52:59] HTTP: ::ffff:127.0.0.1 - - [20/Jun/2026:09:22:59 +0000] "POST /api/v1/collage-requests HTTP/1.1" 201 634 "-" "PostmanRuntime/7.54.0"
+[2026-06-20 12:53:13] HTTP: ::ffff:127.0.0.1 - - [20/Jun/2026:09:23:13 +0000] "POST /api/v1/collage-requests HTTP/1.1" 201 634 "-" "PostmanRuntime/7.54.0"
+[2026-06-20 12:53:15] HTTP: ::ffff:127.0.0.1 - - [20/Jun/2026:09:23:15 +0000] "POST /api/v1/collage-requests HTTP/1.1" 201 634 "-" "PostmanRuntime/7.54.0"
+[2026-06-20 12:53:16] HTTP: ::ffff:127.0.0.1 - - [20/Jun/2026:09:23:16 +0000] "POST /api/v1/collage-requests HTTP/1.1" 201 634 "-" "PostmanRuntime/7.54.0"
+[2026-06-20 12:53:18] HTTP: ::ffff:127.0.0.1 - - [20/Jun/2026:09:23:18 +0000] "POST /api/v1/collage-requests HTTP/1.1" 201 634 "-" "PostmanRuntime/7.54.0"
+[2026-06-20 12:53:19] HTTP: ::ffff:127.0.0.1 - - [20/Jun/2026:09:23:19 +0000] "POST /api/v1/collage-requests HTTP/1.1" 201 634 "-" "PostmanRuntime/7.54.0"
+[2026-06-20 12:53:20] HTTP: ::ffff:127.0.0.1 - - [20/Jun/2026:09:23:20 +0000] "POST /api/v1/collage-requests HTTP/1.1" 201 634 "-" "PostmanRuntime/7.54.0"
+[2026-06-20 12:55:00] INFO: MongoDB connected: localhost
+[2026-06-20 12:55:00] INFO: Server is running on http://localhost:4000
+[2026-06-20 12:55:10] INFO: MongoDB connected: localhost
+[2026-06-20 12:55:10] INFO: Server is running on http://localhost:4000

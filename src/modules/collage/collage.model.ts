@@ -1,13 +1,14 @@
 import { model, Schema } from "mongoose";
 import { Orientation, CollageStatus } from "./collage.types";
 
-const   collageSchema = new Schema(
+const collageSchema = new Schema(
     {
         orientation: {
             type: String,
             enum: Object.values(Orientation),
             required: true,
         },
+
         borderSize: {
             type: Number,
             required: true,
@@ -30,6 +31,16 @@ const   collageSchema = new Schema(
                 },
             },
         ],
+        logs: {
+            type: [
+                {
+                    step: String,
+                    message: String,
+                    timestamp: Date,
+                },
+            ],
+            default: [],
+        },
         resultImageKey: {
             type: String,
         },

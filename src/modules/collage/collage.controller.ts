@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { CollageService, CreateCollageRequestInput } from "./collage.service";
 import { StorageService } from "../../services/storage.services";
+import { collageQueue } from "../../queue/collage.queue";
 
 export class CollageController {
     private collageService: CollageService;
@@ -32,6 +33,20 @@ export class CollageController {
 
         const collage = await this.collageService.createRequest(input);
 
+        await collageQueue.add(
+            "process-collage",
+            { requestId: collage.id },
+            {
+                attempts: 3,
+                backoff: {
+                    type: "exponential",
+                    delay: 2000,
+                },
+                removeOnComplete: true,
+                removeOnFail: false,
+            },
+        );
+
         res.status(201).json(collage);
     }
 
@@ -41,20 +56,20 @@ export class CollageController {
     }
 
     async cancel(req: Request, res: Response): Promise<void> {
-        const id = req.params.id as string ;
+        const id = req.params.id as string;
         const collage = await this.collageService.cancelRequest(id);
 
         res.status(200).json(collage);
     }
 
     async getById(req: Request, res: Response): Promise<void> {
-        const id = req.params.id as string ;
+        const id = req.params.id as string;
         const collage = await this.collageService.getRequest(id);
 
         res.status(200).json(collage);
     }
     async getResult(req: Request, res: Response): Promise<void> {
-        const id = req.params.id as string ;
+        const id = req.params.id as string;
 
         const url = await this.collageService.getResultUrl(id);
 

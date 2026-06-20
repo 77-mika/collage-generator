@@ -6,89 +6,97 @@ import { StorageService } from "./storage.services";
 export class CollageProcessorService {
     private storageService = new StorageService();
 
-    async processNextRequest(): Promise<void> {
-        // const request = await CollageRequestModel.findOneAndUpdate(
-        //     { status: CollageStatus.PENDING },
-        //     { $set: { status: CollageStatus.PROCESSING } },
-        //     { sort: { createdAt: 1 }, new: true },
-        // );
-
+    async processRequestById(requestId: string) {
         const request = await CollageRequestModel.findOneAndUpdate(
-            { status: CollageStatus.PENDING },
-            { $set: { status: CollageStatus.PROCESSING } },
             {
-                sort: { createdAt: 1 },
-                returnDocument: "after",
+                _id: requestId,
+                status: CollageStatus.PENDING,
             },
+            {
+                $set: { status: CollageStatus.PROCESSING },
+            },
+            { new: true },
         );
 
-        // ✅ Guard against null
         if (!request) {
-            return; // No pending request, exit early
+            console.log(`Request ${requestId} not available`);
+            return;
         }
 
-        // Now TypeScript knows request is not null
+        const safeColor = request.borderColor || "#ffffff";
+
+        if (!request.images.length) {
+            throw new Error("No images provided");
+        }
+
+        request.logs.push({
+            step: "START",
+            message: "Processing started",
+            timestamp: new Date(),
+        });
+
+        await request.save();
 
         try {
+            // 1. Download
             const imageBuffers = await Promise.all(
-                request.images.map((image) =>
-                    this.storageService.downloadFile(image.key),
+                request.images.map((img) =>
+                    this.storageService.downloadFile(img.key),
                 ),
             );
 
+            // 2. Metadata
             const metadata = await Promise.all(
-                imageBuffers.map((buffer) => sharp(buffer).metadata()),
+                imageBuffers.map((b) => sharp(b).metadata()),
             );
+
+            if (metadata.some((m) => !m.width || !m.height)) {
+                throw new Error("Invalid image metadata");
+            }
+
+            // 3. Resize
             let resizedImages: Buffer[];
 
-            console.log(metadata);
             if (request.orientation === "HORIZONTAL") {
                 const targetHeight = Math.min(
-                    ...metadata.map((m) => m.height || 0),
+                    ...metadata.map((m) => m.height!),
                 );
 
                 resizedImages = await Promise.all(
-                    imageBuffers.map((buffer) =>
-                        sharp(buffer)
-                            .resize({
-                                height: targetHeight,
-                            })
+                    imageBuffers.map((b) =>
+                        sharp(b)
+                            .resize({ height: targetHeight })
                             .jpeg()
                             .toBuffer(),
                     ),
                 );
             } else {
-                const targetWidth = Math.min(
-                    ...metadata.map((m) => m.width || 0),
-                );
+                const targetWidth = Math.min(...metadata.map((m) => m.width!));
 
                 resizedImages = await Promise.all(
-                    imageBuffers.map((buffer) =>
-                        sharp(buffer)
-                            .resize({
-                                width: targetWidth,
-                            })
+                    imageBuffers.map((b) =>
+                        sharp(b)
+                            .resize({ width: targetWidth })
                             .jpeg()
                             .toBuffer(),
                     ),
                 );
             }
+
+            // 4. resized metadata
             const resizedMetadata = await Promise.all(
-                resizedImages.map((buffer) => sharp(buffer).metadata()),
+                resizedImages.map((b) => sharp(b).metadata()),
             );
 
-            console.log(resizedMetadata);
             const borderSize = request.borderSize;
 
+            // 5. canvas size
             let collageWidth = 0;
             let collageHeight = 0;
 
             if (request.orientation === "HORIZONTAL") {
                 collageWidth =
-                    resizedMetadata.reduce(
-                        (sum, image) => sum + (image.width || 0),
-                        0,
-                    ) +
+                    resizedMetadata.reduce((s, i) => s + (i.width || 0), 0) +
                     borderSize * (resizedImages.length + 1);
 
                 collageHeight =
@@ -97,83 +105,81 @@ export class CollageProcessorService {
                 collageWidth = (resizedMetadata[0].width || 0) + borderSize * 2;
 
                 collageHeight =
-                    resizedMetadata.reduce(
-                        (sum, image) => sum + (image.height || 0),
-                        0,
-                    ) +
+                    resizedMetadata.reduce((s, i) => s + (i.height || 0), 0) +
                     borderSize * (resizedImages.length + 1);
             }
 
-            console.log({
-                collageWidth,
-                collageHeight,
-            });
+            // 6. composite
+            const composites: sharp.OverlayOptions[] = [];
 
-            const collageCanvas = sharp({
+            if (request.orientation === "HORIZONTAL") {
+                let left = borderSize;
+
+                resizedImages.forEach((img, i) => {
+                    composites.push({
+                        input: img,
+                        left,
+                        top: borderSize,
+                    });
+
+                    left += (resizedMetadata[i].width || 0) + borderSize;
+                });
+            } else {
+                let top = borderSize;
+
+                resizedImages.forEach((img, i) => {
+                    composites.push({
+                        input: img,
+                        left: borderSize,
+                        top,
+                    });
+
+                    top += (resizedMetadata[i].height || 0) + borderSize;
+                });
+            }
+
+            // 7. generate
+            const collageBuffer = await sharp({
                 create: {
                     width: collageWidth,
                     height: collageHeight,
                     channels: 3,
-                    background: request.borderColor,
+                    background: safeColor,
                 },
-            });
-
-            const composites: sharp.OverlayOptions[] = [];
-            if (request.orientation === "HORIZONTAL") {
-                let currentLeft = borderSize;
-
-                resizedImages.forEach((image, index) => {
-                    composites.push({
-                        input: image,
-                        left: currentLeft,
-                        top: borderSize,
-                    });
-
-                    currentLeft +=
-                        (resizedMetadata[index].width || 0) + borderSize;
-                });
-            } else {
-                let currentTop = borderSize;
-
-                resizedImages.forEach((image, index) => {
-                    composites.push({
-                        input: image,
-                        left: borderSize,
-                        top: currentTop,
-                    });
-
-                    currentTop +=
-                        (resizedMetadata[index].height || 0) + borderSize;
-                });
-            }
-            console.log(composites);
-
-            const collageBuffer = await collageCanvas
+            })
                 .composite(composites)
                 .jpeg()
                 .toBuffer();
 
+            // 8. upload
             const resultKey = `results/${request._id}.jpg`;
 
             await this.storageService.uploadBuffer(collageBuffer, resultKey);
 
-            console.log("Uploaded collage:", resultKey);
-
-            console.log("Collage generated:", collageBuffer.length);
-
-            const collageMetadata = await collageCanvas.metadata();
-
-            console.log(collageMetadata);
-
+            // 9. final update
             request.resultImageKey = resultKey;
-
             request.status = CollageStatus.COMPLETED;
-            await request.save();
-        } catch (error) {
-            request.status = CollageStatus.FAILED;
+
+            request.logs.push({
+                step: "DONE",
+                message: "Collage created successfully",
+                timestamp: new Date(),
+            });
+
             await request.save();
 
-            throw error;
+            console.log(`Request ${requestId} completed`);
+        } catch (err) {
+            request.status = CollageStatus.FAILED;
+
+            request.logs.push({
+                step: "ERROR",
+                message: (err as Error).message,
+                timestamp: new Date(),
+            });
+
+            await request.save();
+            throw err;
         }
     }
 }

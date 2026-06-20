@@ -3,8 +3,8 @@ import connectDB from "./database/db";
 import logger from "./logging";
 import dotenv from "dotenv";
 dotenv.config();
-
-import "./middleware/scheduler";
+import "./middleware/scheduler"
+import "./queue/collage.worker";
 
 const PORT = process.env.PORT || 3000;
 

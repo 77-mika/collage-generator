@@ -15,7 +15,7 @@ router.get("/collage-requests", asyncHandler(controller.list.bind(controller)));
 
 router.get(
     "/collage-requests/:id",
-    asyncHandler(controller.getById.bind(controller)),
+    asyncHandler(controller.getById.bind(controller)),  
 );
 router.get(
     "/collage-requests/:id/result",
