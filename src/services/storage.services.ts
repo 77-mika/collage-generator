@@ -2,6 +2,7 @@ import {
     S3Client,
     PutObjectCommand,
     GetObjectCommand,
+    DeleteObjectCommand,
 } from "@aws-sdk/client-s3";
 import dotenv from "dotenv";
 dotenv.config();
@@ -78,5 +79,14 @@ export class StorageService {
         return getSignedUrl(this.client, command, {
             expiresIn: 3600,
         });
+    }
+
+    async deleteFile(key: string): Promise<void> {
+        await this.client.send(
+            new DeleteObjectCommand({
+                Bucket: process.env.LIARA_BUCKET_NAME,
+                Key: key,
+            }),
+        );
     }
 }

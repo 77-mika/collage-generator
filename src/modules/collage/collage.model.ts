@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose";
 import { Orientation, CollageStatus } from "./collage.types";
 
-const collageSchema = new Schema(
+const   collageSchema = new Schema(
     {
         orientation: {
             type: String,
@@ -42,5 +42,10 @@ const collageSchema = new Schema(
     },
     { timestamps: true },
 );
+
+collageSchema.index({
+    status: 1,
+    createdAt: 1,
+});
 
 export const CollageRequestModel = model("CollageRequest", collageSchema);

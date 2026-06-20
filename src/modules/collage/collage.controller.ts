@@ -41,20 +41,20 @@ export class CollageController {
     }
 
     async cancel(req: Request, res: Response): Promise<void> {
-        const id = req.params.id;
+        const id = req.params.id as string ;
         const collage = await this.collageService.cancelRequest(id);
 
         res.status(200).json(collage);
     }
 
     async getById(req: Request, res: Response): Promise<void> {
-        const id = req.params.id;
+        const id = req.params.id as string ;
         const collage = await this.collageService.getRequest(id);
 
         res.status(200).json(collage);
     }
     async getResult(req: Request, res: Response): Promise<void> {
-        const id = req.params.id;
+        const id = req.params.id as string ;
 
         const url = await this.collageService.getResultUrl(id);
 

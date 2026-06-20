@@ -7,18 +7,27 @@ export class CollageProcessorService {
     private storageService = new StorageService();
 
     async processNextRequest(): Promise<void> {
-        const request = await CollageRequestModel.findOne({
-            status: CollageStatus.PENDING,
-        }).sort({
-            createdAt: 1,
-        });
+        // const request = await CollageRequestModel.findOneAndUpdate(
+        //     { status: CollageStatus.PENDING },
+        //     { $set: { status: CollageStatus.PROCESSING } },
+        //     { sort: { createdAt: 1 }, new: true },
+        // );
 
+        const request = await CollageRequestModel.findOneAndUpdate(
+            { status: CollageStatus.PENDING },
+            { $set: { status: CollageStatus.PROCESSING } },
+            {
+                sort: { createdAt: 1 },
+                returnDocument: "after",
+            },
+        );
+
+        // ✅ Guard against null
         if (!request) {
-            return;
+            return; // No pending request, exit early
         }
 
-        request.status = CollageStatus.PROCESSING;
-        await request.save();
+        // Now TypeScript knows request is not null
 
         try {
             const imageBuffers = await Promise.all(
