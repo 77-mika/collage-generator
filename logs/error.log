@@ -46,3 +46,74 @@ MulterError: Unexpected field
     at SBMH.push (D:\WorkSpace\NodeJs\collage-generator\node_modules\streamsearch\lib\sbmh.js:104:16)
     at Multipart._write (D:\WorkSpace\NodeJs\collage-generator\node_modules\busboy\lib\types\multipart.js:567:19)
     at writeOrBuffer (node:internal/streams/writable:572:12)
+[2026-06-20 09:24:09] ERROR: Cannot read properties of undefined (reading 'map')
+TypeError: Cannot read properties of undefined (reading 'map')
+    at CollageController.create (/home/mika/workspace/collage-generator/src/modules/collage/collage.controller.ts:18:19)
+    at /home/mika/workspace/collage-generator/src/utils/asyncHandler.ts:12:25
+    at Layer.handleRequest (/home/mika/workspace/collage-generator/node_modules/router/lib/layer.js:152:17)
+    at next (/home/mika/workspace/collage-generator/node_modules/router/lib/route.js:157:13)
+    at multerMiddleware (/home/mika/workspace/collage-generator/node_modules/multer/lib/make-middleware.js:18:41)
+    at Layer.handleRequest (/home/mika/workspace/collage-generator/node_modules/router/lib/layer.js:152:17)
+    at next (/home/mika/workspace/collage-generator/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/mika/workspace/collage-generator/node_modules/router/lib/route.js:117:3)
+    at handle (/home/mika/workspace/collage-generator/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/mika/workspace/collage-generator/node_modules/router/lib/layer.js:152:17)
+[2026-06-20 09:27:17] ERROR: No value provided for input HTTP label: Bucket.
+Error: No value provided for input HTTP label: Bucket.
+    at S3RestXmlProtocol.serializeRequest (/home/mika/workspace/collage-generator/node_modules/@aws-sdk/middleware-sdk-s3/dist-cjs/submodules/s3/index.js:507:31)
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at /home/mika/workspace/collage-generator/node_modules/@smithy/core/dist-cjs/submodules/schema/index.js:87:21
+    at /home/mika/workspace/collage-generator/node_modules/@aws-sdk/middleware-sdk-s3/dist-cjs/submodules/s3/index.js:62:28
+    at /home/mika/workspace/collage-generator/node_modules/@aws-sdk/middleware-sdk-s3/dist-cjs/submodules/s3/index.js:89:20
+    at /home/mika/workspace/collage-generator/node_modules/@aws-sdk/core/dist-cjs/submodules/client/index.js:127:26
+    at StorageService.uploadFile (/home/mika/workspace/collage-generator/src/services/storage.services.ts:26:9)
+    at /home/mika/workspace/collage-generator/src/modules/collage/collage.controller.ts:19:22
+    at async Promise.all (index 0)
+    at CollageController.create (/home/mika/workspace/collage-generator/src/modules/collage/collage.controller.ts:17:32)
+[2026-06-20 09:27:32] ERROR: No value provided for input HTTP label: Bucket.
+Error: No value provided for input HTTP label: Bucket.
+    at S3RestXmlProtocol.serializeRequest (/home/mika/workspace/collage-generator/node_modules/@aws-sdk/middleware-sdk-s3/dist-cjs/submodules/s3/index.js:507:31)
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at /home/mika/workspace/collage-generator/node_modules/@smithy/core/dist-cjs/submodules/schema/index.js:87:21
+    at /home/mika/workspace/collage-generator/node_modules/@aws-sdk/middleware-sdk-s3/dist-cjs/submodules/s3/index.js:62:28
+    at /home/mika/workspace/collage-generator/node_modules/@aws-sdk/middleware-sdk-s3/dist-cjs/submodules/s3/index.js:89:20
+    at /home/mika/workspace/collage-generator/node_modules/@aws-sdk/core/dist-cjs/submodules/client/index.js:127:26
+    at StorageService.uploadFile (/home/mika/workspace/collage-generator/src/services/storage.services.ts:26:9)
+    at /home/mika/workspace/collage-generator/src/modules/collage/collage.controller.ts:19:22
+    at async Promise.all (index 0)
+    at CollageController.create (/home/mika/workspace/collage-generator/src/modules/collage/collage.controller.ts:17:32)
+[2026-06-20 09:29:30] ERROR: Invalid URL
+TypeError: Invalid URL
+    at new URL (node:internal/url:840:25)
+    at parseUrl (/home/mika/workspace/collage-generator/node_modules/@smithy/core/dist-cjs/submodules/transport/index.js:141:25)
+    at toEndpointV1 (/home/mika/workspace/collage-generator/node_modules/@smithy/core/dist-cjs/submodules/transport/index.js:171:12)
+    at customEndpointProvider (/home/mika/workspace/collage-generator/node_modules/@smithy/core/dist-cjs/submodules/endpoints/index.js:263:71)
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+[2026-06-20 09:30:05] ERROR: Invalid URL
+TypeError: Invalid URL
+    at new URL (node:internal/url:840:25)
+    at parseUrl (/home/mika/workspace/collage-generator/node_modules/@smithy/core/dist-cjs/submodules/transport/index.js:141:25)
+    at toEndpointV1 (/home/mika/workspace/collage-generator/node_modules/@smithy/core/dist-cjs/submodules/transport/index.js:171:12)
+    at customEndpointProvider (/home/mika/workspace/collage-generator/node_modules/@smithy/core/dist-cjs/submodules/endpoints/index.js:263:71)
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+[2026-06-20 09:31:13] ERROR: Invalid URL
+TypeError: Invalid URL
+    at new URL (node:internal/url:840:25)
+    at parseUrl (/home/mika/workspace/collage-generator/node_modules/@smithy/core/dist-cjs/submodules/transport/index.js:141:25)
+    at toEndpointV1 (/home/mika/workspace/collage-generator/node_modules/@smithy/core/dist-cjs/submodules/transport/index.js:171:12)
+    at customEndpointProvider (/home/mika/workspace/collage-generator/node_modules/@smithy/core/dist-cjs/submodules/endpoints/index.js:263:71)
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+[2026-06-20 09:31:51] ERROR: Invalid URL
+TypeError: Invalid URL
+    at new URL (node:internal/url:840:25)
+    at parseUrl (/home/mika/workspace/collage-generator/node_modules/@smithy/core/dist-cjs/submodules/transport/index.js:141:25)
+    at toEndpointV1 (/home/mika/workspace/collage-generator/node_modules/@smithy/core/dist-cjs/submodules/transport/index.js:171:12)
+    at customEndpointProvider (/home/mika/workspace/collage-generator/node_modules/@smithy/core/dist-cjs/submodules/endpoints/index.js:263:71)
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+[2026-06-20 09:31:52] ERROR: Invalid URL
+TypeError: Invalid URL
+    at new URL (node:internal/url:840:25)
+    at parseUrl (/home/mika/workspace/collage-generator/node_modules/@smithy/core/dist-cjs/submodules/transport/index.js:141:25)
+    at toEndpointV1 (/home/mika/workspace/collage-generator/node_modules/@smithy/core/dist-cjs/submodules/transport/index.js:171:12)
+    at customEndpointProvider (/home/mika/workspace/collage-generator/node_modules/@smithy/core/dist-cjs/submodules/endpoints/index.js:263:71)
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)

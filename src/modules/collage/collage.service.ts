@@ -3,6 +3,7 @@ import { CollageRequest } from "./collage.types";
 import { CollageRequestModel } from "./collage.model";
 import AppError from "../../errors/appError";
 import mongoose from "mongoose";
+import { StorageService } from "../../services/storage.services";
 
 export interface CreateCollageRequestInput {
     orientation: Orientation;
@@ -32,6 +33,7 @@ export class CollageService {
             throw new AppError("Invalid collage id", 400);
         }
     }
+    private storageService = new StorageService();
     async createRequest(
         input: CreateCollageRequestInput,
     ): Promise<CollageRequest> {
@@ -104,4 +106,22 @@ export class CollageService {
 
         return this.mapToCollageRequest(document);
     }
+
+    async getResultUrl(id: string): Promise<string> {
+        this.validateId(id);
+
+        const document = await CollageRequestModel.findById(id);
+
+        if (!document) {
+            throw new AppError("Collage not found", 404);
+        }
+
+        if (!document.resultImageKey) {
+            throw new AppError("Collage not generated yet", 409);
+        }
+
+        return this.storageService.getFileUrl(document.resultImageKey);
+    }
+
+    
 }

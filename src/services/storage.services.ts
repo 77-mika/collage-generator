@@ -5,6 +5,7 @@ import {
 } from "@aws-sdk/client-s3";
 import dotenv from "dotenv";
 dotenv.config();
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 export class StorageService {
     private client: S3Client;
@@ -66,5 +67,16 @@ export class StorageService {
         );
 
         return key;
+    }
+
+    async getFileUrl(key: string): Promise<string> {
+        const command = new GetObjectCommand({
+            Bucket: process.env.LIARA_BUCKET_NAME,
+            Key: key,
+        });
+
+        return getSignedUrl(this.client, command, {
+            expiresIn: 3600,
+        });
     }
 }

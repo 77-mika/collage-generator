@@ -53,4 +53,13 @@ export class CollageController {
 
         res.status(200).json(collage);
     }
+    async getResult(req: Request, res: Response): Promise<void> {
+        const id = req.params.id;
+
+        const url = await this.collageService.getResultUrl(id);
+
+        res.status(200).json({
+            url,
+        });
+    }
 }
